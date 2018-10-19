@@ -24,4 +24,9 @@ public class IndexController {
     public String Info(){
         return "user_info";
     }
+
+    @RequestMapping("403")
+    public String accessDenied(){
+        return "403";
+    }
 }

@@ -8,9 +8,11 @@
 
     <!--<http pattern="/loginPage" security="none"/>-->
     <http>
+        <access-denied-handler error-page="/403"/>
         <intercept-url pattern="/loginPage" access="hasRole('ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-        <form-login default-target-url="/index" login-page="/loginPage" login-processing-url="/login"/>
+        <form-login default-target-url="/index"
+                    login-page="/loginPage" login-processing-url="/login"/>
         <logout />
         <remember-me key="key"/>
         <csrf disabled="true"/>
