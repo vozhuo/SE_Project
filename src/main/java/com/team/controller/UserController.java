@@ -59,7 +59,7 @@ public class UserController {
         if ((prefix + oldPassword).equals(user.getPassword())) {
             if(newPassword.length() == 0) {
                 model.addFlashAttribute("length_error", "新密码不能为空");
-                return "redirect:/content";
+                return "redirect:/user_info";
             }
             user.setPassword(prefix + newPassword);
             userRepository.save(user);
@@ -67,6 +67,6 @@ public class UserController {
         } else {
             model.addFlashAttribute("error", "旧密码错误");
         }
-        return "redirect:/content";
+        return "redirect:/user_info";
     }
 }

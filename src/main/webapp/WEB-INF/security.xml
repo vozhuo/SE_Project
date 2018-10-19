@@ -6,18 +6,18 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!--<http pattern="/loginPage" security="none"/>-->
     <http>
-        <intercept-url pattern="/**" access="hasRole('USER')" />
-        <form-login default-target-url="/content"/>
+        <intercept-url pattern="/loginPage" access="hasRole('ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <form-login default-target-url="/index" login-page="/loginPage" login-processing-url="/login"/>
         <logout />
         <remember-me key="key"/>
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
         <authentication-provider user-service-ref="myUserDetailsService"/>
     </authentication-manager>
-    <!--&lt;!&ndash;防止重复登录&ndash;&gt;-->
-    <!--<sec:session-management>-->
-        <!--<concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>-->
-    <!--</sec:session-management>-->
+
 </beans:beans>

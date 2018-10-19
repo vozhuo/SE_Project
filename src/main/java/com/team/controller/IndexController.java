@@ -10,13 +10,18 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("login")
+    @RequestMapping("loginPage")
     public String login_web(){
         return "login";
     }
 
-    @RequestMapping("content")
-    public String content(){
-        return "content";
+    @RequestMapping("login_test")
+    public String test(){
+        return "login_test";
+    }
+
+    @RequestMapping("user_info")
+    public String Info(){
+        return "user_info";
     }
 }

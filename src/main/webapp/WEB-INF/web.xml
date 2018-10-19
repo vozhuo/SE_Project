@@ -19,10 +19,10 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!--防止重复登录-->
-    <listener>
-        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
-    </listener>
+    <!--&lt;!&ndash;防止重复登录&ndash;&gt;-->
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>-->
+    <!--</listener>-->
   <servlet>
     <servlet-name>dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

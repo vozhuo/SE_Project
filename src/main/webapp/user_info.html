@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User</title>
-</head>
-<body>
 
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+    <title>User Info</title>
+    <!-- Bootstrap   core CSS -->
+    <link href="https://v4.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://v4.bootcss.com/docs/4.0/examples/checkout/form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2>Checkout form</h2>
+        <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+    <a href="/" class="previous round">&laquo; Index</a>
+    <div class="row">
+        <div class="col-md-5 order-md-1">
+            <h4 class="mb-3">Modify Password</h4>
+            <form class="needs-validation" novalidate th:action="@{/modify}" method="post">
+                <div class="mb-3">
+                    <label for="oldPassword">oldPassword</label>
+                    <input type="password" class="form-control" name="oldPassword" id="oldPassword" required>
+                    <div class="alert-danger" th:text="${error}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="newPassword">newPassword</label>
+                    <input type="password" class="form-control" name="newPassword" id="newPassword" required>
+                    <div class="alert-danger" th:text="${length_error}"></div>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+            </form>
+            <div class="text-success" th:text="${success}"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
