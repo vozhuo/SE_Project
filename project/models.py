@@ -23,13 +23,13 @@ from django.db import models
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    WFO = 'Waiting for orders'
-    WFR = 'Waiting for repair'
-    COMP = 'Repair completed'
+    WFO = '等待接单'
+    WFR = '等待维修'
+    COMP = '维修完成'
     STATUS = (
-        (WFO, '等待接单'),
-        (WFR, '等待维修'),
-        (COMP, '维修完成'),
+        (WFO, 'Waiting for orders'),
+        (WFR, 'Waiting for repair'),
+        (COMP, 'Repair completed'),
     )
     status = models.CharField(choices=STATUS, default=WFO, max_length=18)
     content = models.CharField(max_length=256)

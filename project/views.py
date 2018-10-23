@@ -6,10 +6,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib.auth import views
-
+from django.views import generic
 # Create your views here.
 from django.urls import reverse_lazy
 
+from project.models import Order
 from . import models
 
 
@@ -40,7 +41,7 @@ def logout_view(request):
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('/')
-    return render(request, 'project/login.html')
+    return render(request, 'project/user/login.html')
 
 
 def change_password(request):
@@ -50,13 +51,13 @@ def change_password(request):
         user = User.objects.get(username=request.user.username)
         if user.check_password(old_password):
             if len(new_password) == 0:
-                return render(request, 'project/user_info.html', {'length_error': '密码不能为空'})
+                return render(request, 'project/user/user_info.html', {'length_error': '密码不能为空'})
             user.set_password(new_password)
             user.save()
-            return render(request, 'project/user_info.html', {'success': '密码修改成功'})
+            return render(request, 'project/user/user_info.html', {'success': '密码修改成功'})
         else:
-            return render(request, 'project/user_info.html', {'error': '旧密码错误'})
-    return render(request, 'project/user_info.html')
+            return render(request, 'project/user/user_info.html', {'error': '旧密码错误'})
+    return render(request, 'project/user/user_info.html')
 
 
 class PasswordResetView(views.PasswordResetView):
@@ -79,3 +80,21 @@ class PasswordResetConfirmView(views.PasswordResetConfirmView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+@login_required
+def order_add(request):
+    if request.method == 'POST':
+        content = request.POST['content']
+        order = Order.objects.create(user=User.objects.get(username=request.user.username), content=content)
+        order.save()
+        return redirect('/order/list')
+    return render(request, 'project/order/add_order.html')
+
+
+class OrderListView(generic.ListView):
+    model = Order
+    template_name = 'project/order/order_list.html'
+
+    def get_queryset(self):
+        return Order.objects.filter(user=User.objects.get(username=self.request.user.username))
