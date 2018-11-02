@@ -5,11 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'reset_done' %}">
+{% block content %}
+{#<form action="{% url 'reset_done' %}">#}
+<form method="post">
     {% csrf_token %}
-    {{ PasswordResetForm }}
-    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+    {{ form.as_p }}
+{#    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>#}
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sent</button>
 </form>
+{% endblock %}
 </body>
 </html>

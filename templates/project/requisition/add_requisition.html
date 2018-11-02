@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<form class="form-horizontal" action="{% url 'add_requisition' %}" method="post">
+                {% csrf_token %}
+				<div class="control-group">
+					<label class="control-label" for="inputContent">内容</label>
+					<div class="controls">
+						<input id="inputContent" name="content" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn" type="submit">提交</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

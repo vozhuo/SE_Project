@@ -21,7 +21,7 @@ from django.db import models
 #         verbose_name_plural = verbose_name
 
 
-class Order(models.Model):
+class Requisition(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     WFO = '等待接单'
     WFR = '等待维修'
@@ -39,5 +39,27 @@ class Order(models.Model):
         return self.content
 
     class Meta:
+        db_table = 'requisition'
+        verbose_name = "报修单"
+        verbose_name_plural = verbose_name
+
+
+class Order(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.IntegerField()
+    items = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.items
+
+    class Meta:
+        db_table = 'order'
         verbose_name = "订单"
         verbose_name_plural = verbose_name
+
+
+# class Food(models.Model):
+#     name = models.CharField(primary_key=True, max_length=100)
+#     price = models.IntegerField()
+#     # reception =
